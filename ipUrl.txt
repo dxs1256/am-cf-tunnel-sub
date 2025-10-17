@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/dxs1256/Domain-Lookup/refs/heads/main/Last-domain.txt
+https://raw.githubusercontent.com/dxs1256/cf-auto-ip/refs/heads/main/ip.txt
