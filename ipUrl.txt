@@ -1,2 +1,1 @@
 https://raw.githubusercontent.com/dxs1256/cf-auto-ip/refs/heads/main/ip.txt
-https://raw.githubusercontent.com/dxs1256/Domain-Lookup/refs/heads/main/Last-domain.txt?token=GHSAT0AAAAAADNGKUAJTQ3ZRI2HNQE635AQ2HSD24A
