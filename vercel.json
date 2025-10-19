@@ -4,11 +4,5 @@
             "source": "/:path*",
             "destination": "/api/vercel.js"
         }
-    ],
-    "crons": [
-        {
-            "path": "/api/vercel",
-            "schedule": "*/10 * * * *"
-        }
     ]
 }
