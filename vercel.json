@@ -8,7 +8,8 @@
     "crons": [
         {
             "path": "/api/vercel",
-            "schedule": "0 */4 * * *"
+            "schedule": "*/10 * * * *" 
+            // ⭐️ 已修改为：每 10 分钟运行一次
         }
     ]
 }
