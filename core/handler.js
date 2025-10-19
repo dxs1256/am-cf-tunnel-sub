@@ -568,16 +568,38 @@ async function getConfigContent(rawHost, userAgent, _url, host, fakeHostName, fa
     log(`------------getConfigContent------------------`);
     const uniqueIpTxt = [...new Set([...ipUrlTxt, ...ipUrlCsv])];
     let responseBody;
-    if (!protType) {
-        protType = doubleBase64Decode(protTypeBase64);
-        const responseBody1 = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
-        protType = doubleBase64Decode(protTypeBase64Tro);
-        const responseBody2 = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
-        responseBody = [responseBody1, responseBody2].join('\n');
-    } else {
-        responseBody = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, doubleBase64Decode(protTypeBase64), nat64, hostRemark);
-        responseBody = [responseBody].join('\n');
-    }
+const defaultProtocol = doubleBase64Decode(protTypeBase64); // 解码得到 'vless'
+    let currentProtocol = protType || defaultProtocol; // 优先使用 PROT_TYPE，否则使用 VLESS
+    
+    // --- 1. 生成 IP 列表节点（不再包含 Trojan）---
+    // 使用用户设置的协议 (如果设置了) 或默认的 VLESS 协议
+    responseBody = splitNodeData(
+        uniqueIpTxt, 
+        noTLS, 
+        fakeHostName, 
+        fakeUserId, 
+        userAgent, 
+        currentProtocol, 
+        nat64, 
+        hostRemark
+    );
+    responseBody = [responseBody].join('\n'); 
+
+    // --- 2. 处理 ipLocal 节点 ---
+    // 确保 ipLocal 部分使用默认协议 (VLESS)
+    const responseBodyTop = splitNodeData(
+        ipLocal, 
+        noTLS, 
+        fakeHostName, 
+        fakeUserId, 
+        userAgent, 
+        defaultProtocol, 
+        nat64, 
+        hostRemark
+    );
+    
+    // 合并 ipLocal 节点和 IP 列表节点
+    responseBody = [responseBodyTop, responseBody].join('\n');
     protType = doubleBase64Decode(protTypeBase64);
     const responseBodyTop = splitNodeData(ipLocal, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
     responseBody = [responseBodyTop, responseBody].join('\n');
