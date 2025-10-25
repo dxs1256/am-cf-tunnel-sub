@@ -1,1 +1,12 @@
+# wrangler.toml
+
+# Worker 名称：建议设置为日志中 CI 期望的名称 "sub"
+# 这将消除日志中的名称不匹配警告。
+name = "sub"
+
+# Worker 入口文件路径：使用您提供的路径
 main = "_worker.js"
+
+# 兼容性日期：这是解决 ERROR 所必需的
+# 建议使用日志中提示的日期 "2025-10-25" 或更新的日期
+compatibility_date = "2025-10-25"
